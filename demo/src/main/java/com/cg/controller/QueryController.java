@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -21,7 +20,7 @@ public class QueryController {
     private JPAQueryFactory jpaQueryFactory;
 
     @PostMapping("/post")
-    public List<Object> getHello(@RequestBody QueryCondition queryCondition) throws NoSuchFieldException, IOException {
+    public List<Object> query(@RequestBody QueryCondition queryCondition) throws NoSuchFieldException {
 
         JPAQuery query = JPAQueryBuilder.buildJPAQueryBase(jpaQueryFactory, QComputer.computer,
                 queryCondition.getAndCondition(), queryCondition.getOrCondition());

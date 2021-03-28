@@ -9,7 +9,6 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 
-import java.io.IOException;
 import java.util.Set;
 
 public class JPAQueryBuilder {
@@ -18,7 +17,7 @@ public class JPAQueryBuilder {
 
     public static <T extends EntityPathBase> JPAQuery buildJPAQueryBase(
             JPAQueryFactory queryFactory, T t, Set<Condition> andConditions, Set<Condition> orConditions)
-            throws NoSuchFieldException, IOException {
+            throws NoSuchFieldException {
         JPAQuery q = queryFactory.selectFrom(t);
         Class typeOfRootClazz = t.getType();
         BooleanBuilder booleanBuilder = new BooleanBuilder();
@@ -36,6 +35,7 @@ public class JPAQueryBuilder {
                     ConstantImpl.create(mapper.map(condition.getValue(),
                             getActualClass(typeOfRootClazz, condition.getName())))));
         }
+
         q.where(booleanBuilder);
         return q;
     }
