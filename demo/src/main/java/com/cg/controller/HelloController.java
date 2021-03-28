@@ -11,7 +11,6 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -44,26 +43,14 @@ public class HelloController {
         mouse.setMakers("SteelSeries");
         mouse.setOwner("Neil");
         mouseRepository.save(mouse);
-        computer.setMouse(mouse);
-        computerRepository.save(computer);
-        return "hello";
-    }
-
-    @GetMapping("/monitor")
-    public String getHello2(@RequestParam Long id) {
-        Long time1 = System.currentTimeMillis();
         Monitor monitor = new Monitor();
-        monitor.setSeries("SUMSANG" + "_" + time1.toString());
-        monitor.setComputer(computerRepository.getOne(id));
-        Monitor monitor2 = new Monitor();
-        monitor2.setSeries("SUMSANG-2" + "_" + time1.toString());
-        monitor2.setComputer(computerRepository.getOne(id));
-        Monitor monitor3 = new Monitor();
-        monitor3.setSeries("SUMSANG-3" + "_" + time1.toString());
-        monitor3.setComputer(computerRepository.getOne(id));
+        monitor.setSeries("SAMSUNG" + "_" + time1.toString());
+        monitor.setMakers("SAMSUNG");
+        monitor.setOwner("Neil Young");
         monitorRepository.save(monitor);
-        monitorRepository.save(monitor2);
-        monitorRepository.save(monitor3);
+        computer.setMouse(mouse);
+        computer.setMonitor(monitor);
+        computerRepository.save(computer);
         return "hello";
     }
 }
