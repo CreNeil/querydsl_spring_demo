@@ -1,0 +1,15 @@
+test datatest dataFileChannel
+Writing data to a FileChannel is done using the FileChannel.write() method, which takes a Buffer as parameter. Here is an example:
+
+String newData = "New String to write to file..." + System.currentTimeMillis();
+
+ByteBuffer buf = ByteBuffer.allocate(48);
+buf.clear();
+buf.put(newData.getBytes());
+
+buf.flip();
+
+while(buf.hasRemaining()) {
+    channel.write(buf);
+}
+Notice how the FileChannel.write() method is called inside a while-loop. There is no guarantee of how many bytes the write() method writes to the FileChannel. Therefore we repeat the write() call until the Buffer has no further bytes to write.
